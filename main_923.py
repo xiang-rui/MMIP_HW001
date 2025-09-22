@@ -147,6 +147,14 @@ def process_images(data_path, result_path=None):
             save_image(nn_img, os.path.join(resize_paths["NN"], f"{file.split('.')[0]}_NN_{new_w}x{new_h}.png"))
             save_image(bil_img, os.path.join(resize_paths["Bilinear"], f"{file.split('.')[0]}_Bil_{new_w}x{new_h}.png"))
 
+        img_32x32 = nn_resize(img_2d, 32, 32)
+        img_32_to_512 = nn_resize(img_32x32, 512, 512)
+        save_image(img_32_to_512, os.path.join(resize_paths["NN"], f"{file.split('.')[0]}_NN_32x32_to_512x512.png"))
+
+        img_32x32 = nn_resize(img_2d, 32, 32)
+        img_32_to_512 = nn_resize(img_32x32, 512, 512)
+        save_image(img_32_to_512, os.path.join(resize_paths["Bilinear"], f"{file.split('.')[0]}_Bilinear_32x32_to_512x512.png"))
+
     # 儲存中心10x10文字檔
     with open(os.path.join(result_path, "center_pixels.txt"), "w") as f:
         for file,pixels in center_pixels_dict.items():
